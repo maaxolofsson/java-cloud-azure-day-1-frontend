@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "fetch": "^1.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.0.1",
     "@eslint/js": "^9.11.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",

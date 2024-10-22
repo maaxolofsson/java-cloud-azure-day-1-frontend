@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function AuthorList({ authors }) {
     console.log(authors)
+    console.log("Hello")
     return (
         <div>
             <h1>Authors</h1>

@@ -1,17 +1,24 @@
 import { createContext, useEffect, useState } from 'react';
 import './App.css'
 import AuthorList from './components/AuthorList'
-import * as API from "./components/API"
 import { Routes, Route } from 'react-router-dom';
+import * as API from './API'
 import CreateAuthor from './components/CreateAuthor';
 
 const AuthorContext = createContext()
 
 function App() {
+
   const [authors, setAuthors] = useState([])
 
-  useEffect(() => async function () {
-    setAuthors((await API.get("authors")).data);
+  useEffect(() => {
+    const fetching = async function () {
+      const res = (await API.get("authors"))
+      console.log(res)
+      setAuthors(res.data);
+    }
+
+    fetching().catch(console.error);
   }, [])
 
   const addAuthor = async (author) => {
@@ -32,4 +39,4 @@ function App() {
   )
 }
 
-export {App, AuthorContext};
+export { App, AuthorContext };

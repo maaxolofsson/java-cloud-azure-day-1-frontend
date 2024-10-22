@@ -1,10 +1,13 @@
 // This file is reused (i made it and used it for another exercise)
 
-const baseURL = "http://localhost:4000/"
+const baseURL = "https://max-olofsson-backend-app.azurewebsites.net/"
 
 export async function get(endpoint) {
     const res = await fetch(baseURL + endpoint);
     const data = await res.json();
+    console.log("Inside get " + baseURL + endpoint)
+    console.log("res:")
+    console.log(res)
     return data
 }
 
