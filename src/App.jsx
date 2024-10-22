@@ -1,20 +1,20 @@
 import { createContext, useEffect, useState } from 'react';
 import './App.css'
 import AuthorList from './components/AuthorList'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import * as API from './API'
 import CreateAuthor from './components/CreateAuthor';
 
 const AuthorContext = createContext()
 
 function App() {
+  const navigate = useNavigate()
 
   const [authors, setAuthors] = useState([])
 
   useEffect(() => {
     const fetching = async function () {
       const res = (await API.get("authors"))
-      console.log(res)
       setAuthors(res.data);
     }
 
@@ -22,9 +22,10 @@ function App() {
   }, [])
 
   const addAuthor = async (author) => {
-    console.log("Inside handleCreateAuthor")
     const res = await API.post("authors", author)
-    console.log(res)
+    res.resData.data.books = [] // Needed because it is set to null from the API
+    setAuthors([...authors, res.resData.data])
+    navigate('/')
   }
 
   return (

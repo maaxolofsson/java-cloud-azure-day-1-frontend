@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthorContext } from "../App";
 
-function AuthorList({ authors }) {
-    console.log(authors)
-    console.log("Hello")
+function AuthorList() {
+    const authorContext = useContext(AuthorContext)
+    const { authors } = authorContext
+
     return (
         <div>
             <h1>Authors</h1>

@@ -15,7 +15,7 @@ function CreateAuthor() {
             "firstName": firstName,
             "lastName": lastName
         }
-        console.log(await addAuthor(author))
+        await addAuthor(author)
     }
 
     return (

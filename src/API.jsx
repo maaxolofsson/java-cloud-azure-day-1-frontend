@@ -5,9 +5,6 @@ const baseURL = "https://max-olofsson-backend-app.azurewebsites.net/"
 export async function get(endpoint) {
     const res = await fetch(baseURL + endpoint);
     const data = await res.json();
-    console.log("Inside get " + baseURL + endpoint)
-    console.log("res:")
-    console.log(res)
     return data
 }
 
@@ -16,7 +13,6 @@ export async function getOne(endpoint, id) {
         method: 'GET',
         mode: 'no-cors'
     }
-    console.log(baseURL + endpoint + "/" + id)
     const httpRes = await fetch(baseURL + endpoint + "/" + id, c);
     const data = await httpRes.json();
     return { httpRes, data }
@@ -41,8 +37,6 @@ export async function post(endpoint, data) { // data = obj (json)
         },
         body: JSON.stringify(data)
     }
-    console.log("in post")
-    console.log(data)
     const httpRes = await fetch(baseURL + endpoint, c);
     const resData = await httpRes.json();
     return { httpRes, resData };
