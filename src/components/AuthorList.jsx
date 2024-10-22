@@ -10,7 +10,9 @@ function AuthorList() {
     return (
         <div>
             <h1>Authors</h1>
-            <Link to={'/createAuthor'}>Create new author</Link>
+            <Link to={'/createAuthor'}>Create new author</Link><br />
+            <Link to={'/createBook'}>Create new book for author</Link>
+            <hr />
             <ul>
                 {authors.length < 1 ? "No authors..." :
                     authors.map(author =>

@@ -4,13 +4,16 @@ import AuthorList from './components/AuthorList'
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import * as API from './API'
 import CreateAuthor from './components/CreateAuthor';
+import CreateBook from './components/CreateBook';
 
 const AuthorContext = createContext()
+const BookContext = createContext()
 
 function App() {
   const navigate = useNavigate()
 
   const [authors, setAuthors] = useState([])
+  const [books, setBooks] = useState([])
 
   useEffect(() => {
     const fetching = async function () {
@@ -28,16 +31,24 @@ function App() {
     navigate('/')
   }
 
+  const addBook = async (book) => {
+    console.log("Inside addbook NOT IMPLEMENTED")
+    navigate('/')
+  }
+
   return (
     <div>
-      <AuthorContext.Provider value={{ addAuthor, authors }}>
-        <Routes>
-          <Route path='/' element={<AuthorList authors={authors} />}></Route>
-          <Route path='/createAuthor' element={<CreateAuthor />}></Route>
-        </Routes>
-      </AuthorContext.Provider>
-    </div>
+      <BookContext.Provider value={{ addBook, books }}>
+        <AuthorContext.Provider value={{ addAuthor, authors }}>
+          <Routes>
+            <Route path='/' element={<AuthorList authors={authors} />}></Route>
+            <Route path='/createAuthor' element={<CreateAuthor />}></Route>
+            <Route path='/createBook' element={<CreateBook />}></Route>
+          </Routes>
+        </AuthorContext.Provider>
+      </BookContext.Provider>
+    </div >
   )
 }
 
-export { App, AuthorContext };
+export { App, AuthorContext, BookContext };
