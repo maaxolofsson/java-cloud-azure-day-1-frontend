@@ -12,6 +12,7 @@ function CreateBook() {
     const { addBook } = bookContext
 
     // States
+    const [showError, setShowError] = useState(false)
     const [selectedAuthorId, setSelectedAuthorId] = useState(
         authors.length == 0 ? -1 : authors[0].id
     )
@@ -23,12 +24,19 @@ function CreateBook() {
     // Functions
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Rating before: " + rating)
+
+        // Validating inputs
         if (rating < 1) {
             setRating(1)
         } else if (rating > 10) {
             setRating(10)
         }
+
+        if (title === "" || description === "" || genre === "") {
+            setShowError(true)
+            return;
+        }
+
         const book = {
             "authorId": parseInt(selectedAuthorId),
             "title": title,
@@ -36,12 +44,13 @@ function CreateBook() {
             "genre": genre,
             "rating": rating
         }
-        console.log("Rating after: " + rating)
         await addBook(book)
     }
 
     return (
         <div>
+            {showError ? <h3 style={{ backgroundColor: 'red' }}>One or more fields are incorrectly or not set.</h3> : null}
+
             <p>Create new book for an author</p> <br />
             {authors.length > 0 ?
                 <>
