@@ -1,6 +1,6 @@
 // This file is reused (i made it and used it for another exercise)
 
-const baseURL = "https://max-olofsson-backend-app.azurewebsites.net/"
+const baseURL = "http://172.167.42.59:5000/"
 
 export async function get(endpoint) {
     const res = await fetch(baseURL + endpoint);

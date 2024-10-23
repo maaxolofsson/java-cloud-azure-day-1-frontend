@@ -13,7 +13,6 @@ function App() {
   const navigate = useNavigate()
 
   const [authors, setAuthors] = useState([])
-  const [books, setBooks] = useState([])
 
   useEffect(() => {
     const fetching = async function () {
@@ -32,13 +31,23 @@ function App() {
   }
 
   const addBook = async (book) => {
-    console.log("Inside addbook NOT IMPLEMENTED")
+    console.log("In addBook given:")
+    console.log(book)
+    const res = await API.post("books", book)
+    if (res.httpRes.status === 201) {
+      console.log("Successfully added book to author")
+      const givenAuthor = authors.find(auth => auth.id === book.authorId)
+      givenAuthor.books = [...givenAuthor.books, res.resData.data]
+    } else {
+      console.log("Something went wrong when adding book to author.")
+      console.log(res)
+    }
     navigate('/')
   }
 
   return (
     <div>
-      <BookContext.Provider value={{ addBook, books }}>
+      <BookContext.Provider value={{ addBook }}>
         <AuthorContext.Provider value={{ addAuthor, authors }}>
           <Routes>
             <Route path='/' element={<AuthorList authors={authors} />}></Route>
