@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthorContext } from "../App";
 
 function CreateAuthor() {
+    const [showError, setShowError] = useState(false)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
 
@@ -11,6 +12,11 @@ function CreateAuthor() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(firstName === "" || lastName === ""){
+            setShowError(true)
+            return;
+        }
+        
         const author = {
             "firstName": firstName,
             "lastName": lastName
@@ -20,6 +26,7 @@ function CreateAuthor() {
 
     return (
         <div>
+            {showError ? <h3 style={{ backgroundColor: 'red' }}>One or more fields are incorrectly or not set.</h3> : null}
             <p>Create new author</p>
             <Link to={'/'}>Go back</Link><br /><br />
             <form action="">
